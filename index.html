@@ -412,6 +412,14 @@
                 </div>
                 
                 <div class="control-group">
+                    <label for="letter-spacing">Letter Spacing</label>
+                    <div class="slider-container">
+                        <input type="range" id="letter-spacing" min="-0.2" max="1" step="0.05" value="0">
+                        <span class="slider-value" id="letter-spacing-value">0em</span>
+                    </div>
+                </div>
+                
+                <div class="control-group">
                     <label for="bg-color">Background Colour</label>
                     <input type="color" id="bg-color" value="#f8f8f8">
                 </div>
@@ -452,6 +460,8 @@
             const fontSizeValue = document.getElementById('font-size-value');
             const lineHeightSlider = document.getElementById('line-height');
             const lineHeightValue = document.getElementById('line-height-value');
+            const letterSpacingSlider = document.getElementById('letter-spacing');
+            const letterSpacingValue = document.getElementById('letter-spacing-value');
             const bgColorInput = document.getElementById('bg-color');
             const textColorInput = document.getElementById('text-color');
             const resolutionSlider = document.getElementById('resolution');
@@ -590,6 +600,12 @@
                 asciiOutput.style.lineHeight = lineHeight;
             });
             
+            letterSpacingSlider.addEventListener('input', function() {
+                const letterSpacing = this.value;
+                letterSpacingValue.textContent = `${letterSpacing}em`;
+                asciiOutput.style.letterSpacing = `${letterSpacing}em`;
+            });
+            
             bgColorInput.addEventListener('input', function() {
                 asciiOutput.style.backgroundColor = this.value;
             });
@@ -611,6 +627,11 @@
                 lineHeightSlider.value = 1.2;
                 lineHeightValue.textContent = '1.2';
                 asciiOutput.style.lineHeight = '1.2';
+                
+                // Reset letter spacing
+                letterSpacingSlider.value = 0;
+                letterSpacingValue.textContent = '0em';
+                asciiOutput.style.letterSpacing = '0em';
                 
                 // Reset colours
                 bgColorInput.value = '#f8f8f8';
@@ -852,6 +873,7 @@
                         font-family: monospace;
                         line-height: ${lineHeightSlider.value};
                         font-size: ${fontSizeSlider.value}px;
+                        letter-spacing: ${letterSpacingSlider.value}em;
                         white-space: pre;
                     }
                 `;
